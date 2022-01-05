@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import csv
+import pandas as pd
 
 def getHTML(url):
     response = requests.get(url)
@@ -30,10 +31,8 @@ with open('books.json', 'w') as j_file:
     j_file.write(books)
 
 
-# keys = book_data[0].keys()
+with open('books.json', encoding='utf-8-sig') as f_input:
+    df = pd.read_json(f_input)
 
-# with open('books.csv', 'w') as csv_file:
-#     dict_writer = csv.DictWriter(csv_file, keys)
-#     dict_writer.writeheader()
-#     dict_writer.writerows(book_data)
+df.to_csv('books.csv', encoding='utf-8', index=False)
 
